@@ -53,19 +53,100 @@ Either way, to make sure basic GTM setup is valid, please use [Google Tag Assist
 
 All previous hardcoded Google Analytics / Tag Manager snippets that may exist should be removed from the code, as they will be dealt with through GTM directly, and could cause issues such as double pageviews if they're kept in the codebase.
 
-# Funnel steps load
+# Funnel steps tracking
+
+## Société funnel
+
+Each time a Société funnel step is displayed :
+
+```javascript
+dataLayer.push({
+    'event' : 'societeFunnel',
+    'societeFunnelStepName' : 'Votre société', //Step displayed : "Votre société", "Votre activité", "La structure", "Siège social", "Vos statuts", "Nos Formules"...
+    'societeFunnelStepNumber' : 2, //Self explanatory
+    'societeFunnelCompany' : 'SAS', //Company type : "SAS", "SARL", "EURL"....
+    'societeFunnelUserInfos' : { //User infos given by the user on the previous step
+
+        //keys to populate when step "Votre société" has been validated
+        'companyNameFilled' : true, //true or false depending if field has been set by user
+        'userEmailFilled' : true, //true or false depending if field has been set by user
+
+        //keys to populate when step "Votre Activité" has been validated
+        'activityFilled' : true, //true or false depending if field has been set by user
+
+        //keys to populate when step "La structure" has been validated
+        'capitalSocial' : 10000, //Value set in "Montant du capital social" in €
+
+        //keys to populate when step "Siège social" has been validated
+        'adressType' : 'Chez le gérant', //Value set in "Type d'adresse" : 'Chez le gérant', 'Local commercial', 'Auprès d'une société de domiciliation'
+
+        //keys to populate when step "Nos formules" has been validated
+        'formulaName' : 'Basic', //"Basic", "Plus", "Premium" depending on contract type
+
+        //keys to populate when step "Paiement" has been validated
+        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
+    }
+})
+```
+
+## Association funnel
+
+Each time an Association funnel step is displayed :
+
+```javascript
+dataLayer.push({
+    'event' : 'assocFunnel',
+    'assocFunnelStepName' : 'Votre association', //Step displayed : "Votre association", "Votre activité", "La structure", "Siège social", "Vos statuts", "Nos Formules"...
+    'assocFunnelStepNumber' : 2, //Self explanatory
+    'assocFunnelUserInfos' : { //User infos given by the user on the previous step
+
+        //keys to populate when step "Votre association" has been validated
+        'assocNameFilled' : true, //true or false depending if field has been set by user
+        'userEmailFilled' : true, //true or false depending if field has been set by user
+
+        //keys to populate when step "Votre Activité" has been validated
+        'activityFilled' : true, //true or false depending if field has been set by user
+
+        //keys to populate when step "Siège social" has been validated
+        'adressType' : 'Chez le gérant', //Value set in "Type d'adresse" : 'Chez le gérant', 'Local commercial', 'Auprès d'une société de domiciliation'
+
+        //keys to populate when step "Nos formules" has been validated
+        'formulaName' : 'Basic', //"Basic", "Premium" depending on contract type
+
+        //keys to populate when step "Paiement" has been validated
+        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
+    }
+})
+```
+
+## Protéger ma marque funnel
 
 Each time a given step is loaded :
 
 ```javascript
 dataLayer.push({
-    'event' : 'funnelStep',
-    'funnelName' : 'Votre marque',//Name of the funnel : "Créer ma société", "Créer mon association", "Protéger ma marque"...
-    'funnelStepInfo': {
-        'stepName' : 'Vos statuts', //Step name, as displayed on the site
-        'stepNumber' : 2, //Self explanatory
-        'companyType' : 'EURL', //Company type : EURL, SARL...
-        'transactionAmount' : 59 //Only in the last step, transaction amount
+    'event' : 'protectBrandFunnel',
+    'protectBrandFunnelStepName' : 'Votre association', //Step displayed : "Votre marque", "Votre activité", "Nos Formules"...
+    'protectBrandFunnelStepNumber' : 2, //Self explanatory
+    'protectBrandFunnelUserInfos' : { //User infos given by the user on the previous step
+
+        //keys to populate when step "Votre marque" has been validated
+        'depotType' : 'Nom de marque', //'Nom de marque' or 'Identité visuelle'
+
+        //keys to populate when step "Votre marque" has been validated
+        'protectExtension' : 'Polynesie', //'Polynesie' or 'France métropolitaine'
+
+        //keys to populate when step "Le titulaire" has been validated
+        'brandTitulaire' : 'Un particulier', //'Un particulier', 'Une société', 'Une auto-entreprise', 'Une association'
+
+        //keys to populate when step "Nos formules" has been validated
+        'formulaName' : 'Basic', //"Basic", "Premium" depending on contract type
+
+        //keys to populate when step "Paiement" has been validated
+        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
     }
 })
 ```
@@ -81,7 +162,7 @@ Each time an 'actualite' or 'academie' content, **article or category page** is 
 ```javascript
 dataLayer.push({
     'event' : 'contentLoad',
-    'contentType' : 'article', //'article' or 'category'
+    'contentType' : 'Article', //"Article" or "Category"
     'contentChars' : 4321, //Number of characters in the article, in the case of 'article' only
     'contentTags' : ['Loi Pacte','SPI'], //List of all tags for an article in a JS array
     'contentAuthor' : 'Anne Perrin', //Self explanatory
@@ -104,14 +185,10 @@ Each time there is an update to the login status in the app (login or logout) :
 ```javascript
 dataLayer.push({
     'event' : 'loginStatusUpdate',
-    'loginStatusUpdateType' : 'login', //'login' or 'logout'
+    'loginStatusUpdateType' : 'Login', //'Login' or 'Logout'
     'userID' : '123456789' //Simplitoo User ID 
 })
 ```
-
-# Chatbot tracking
-
-See if possible to get some data from landbot and do a postMessage or parent.dataLayer.push. To be discussed.
 
 # Deployment notes
 
