@@ -170,12 +170,19 @@ dataLayer.push({
 })
 ```
 
-Social share block bottom of 'actualite' or 'academie' articles should be decorated with a ```data-tms-social-bottom``` attribute
+Social share block bottom of 'academie' articles should be decorated with a ```data-tms-bottom-academie``` attribute
 
 !["Social Share"](https://i.ibb.co/DCh3DCv/social.jpg)
 
 ```html
-<a data-tms-social-bottom="yes" class="share-action share-icon share-facebook" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fstaging.simplitoo.fr%2Factualites%2Fles-changements-apportes-par-la-loi-pacte%2F" original-title="Facebook"><i class="rbi rbi-facebook"></i><span>Share on Facebook</span></a>
+<a data-tms-bottom-academie="yes" class="share-action share-icon share-facebook" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fstaging.simplitoo.fr%2Factualites%2Fles-changements-apportes-par-la-loi-pacte%2F" original-title="Facebook"><i class="rbi rbi-facebook"></i><span>Share on Facebook</span></a>
+```
+
+Previous / next article button at the bottom of 'blog' articles should be decorated with a ```data-tms-bottom-blog``` attribute
+
+!["Next prev"](https://i.ibb.co/fdtNvc8/simplitoo-blog.jpg)
+```html
+<div class="single-box clearfix" data-tms-bottom-blog="yes">
 ```
 
 # User login update
