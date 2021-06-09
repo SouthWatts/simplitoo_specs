@@ -84,7 +84,7 @@ dataLayer.push({
         'formulaName' : 'Basic', //"Basic", "Plus", "Premium" depending on contract type
 
         //keys to populate when step "Paiement" has been validated
-        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'transactionAmount' : 332, //Total transaction amount, excluding administrative fees
         'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
     }
 })
@@ -115,7 +115,7 @@ dataLayer.push({
         'formulaName' : 'Basic', //"Basic", "Premium" depending on contract type
 
         //keys to populate when step "Paiement" has been validated
-        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'transactionAmount' : 332, //Total transaction amount, excluding administrative fees
         'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
     }
 })
@@ -145,7 +145,7 @@ dataLayer.push({
         'formulaName' : 'Basic', //"Basic", "Premium" depending on contract type
 
         //keys to populate when step "Paiement" has been validated
-        'transactionAmount' : 332, //Total transaction amount, including administrative fees
+        'transactionAmount' : 332, //Total transaction amount, excluding administrative fees
         'paymentType' : 'One shot' //"One shot" or "Deferred" (upcoming feature)
     }
 })
